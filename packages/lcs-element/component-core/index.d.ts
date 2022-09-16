@@ -6,7 +6,6 @@ declare namespace LCS {
     version: string;
     tag: string;
     id: string;
-    tailwindicssList: string[];
   }
   export type Size = 'small' | 'large';
 }
