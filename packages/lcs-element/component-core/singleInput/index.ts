@@ -17,6 +17,4 @@ interface SingleInput extends LCS.LCSComponent {
   disabledCut: boolean;
 }
 
-export const elSingleInput: SingleInput = {
-  
-};
+export const elSingleInput: SingleInput = {};
