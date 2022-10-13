@@ -6,15 +6,34 @@ export interface LcsSwitch extends LCS.Component {
   disabled: string
 }
 
-function syncVariableFunc (cid: string): string[] {
-  return [`switchActiveValue_${cid}`, `switchInActiveValue_${cid}`, `switchDisabled_${cid}`]
-}
-
 const tag = 'lcs-element-switch' as const
 
-function elementSwitch (cid: string): LcsSwitch {
+const getNodeMethods = (cid: string): LCS.MethodInfo[] => ([
+  {
+    desc: 'switch change API',
+    open: false,
+    name: `switchChange_${cid}`
+  },
+  {
+    desc: 'switch disabled API',
+    open: false,
+    name: `switchDisabled_${cid}`
+  },
+  {
+    desc: 'switch v-if API',
+    open: false,
+    name: `switchIf_${cid}`
+  },
+  {
+    desc: 'switch v-show API',
+    open: false,
+    name: `switchDisabled_${cid}`
+  }
+])
+
+const initSwitchNodeInfo = (cid: string): LcsSwitch => {
   if (!cid) {
-    throw new Error('new switch node error!!')
+    throw new Error('init new switch node error!!')
   }
 
   return {
@@ -27,17 +46,15 @@ function elementSwitch (cid: string): LcsSwitch {
     'active-value': `switchActiveValue_${cid}`,
     'inactive-value': `switchInActiveValue_${cid}`,
     disabled: `switchDisabled_${cid}`,
-    evtList: [
-      {
-        name: `switchChange_${cid}`,
-        desc: 'switch开启或关闭后触发'
-      }
-    ]
+    evtList: getNodeMethods(cid)
   }
 }
 
 export default {
   tag,
-  elementNode: elementSwitch,
-  syncVariableFunc
+  elementNode: (cid: string): LcsSwitch => initSwitchNodeInfo(cid),
+  getNodeMethods,
+  getSyncVariables: (cid: string): string[] => {
+    return [`switchActiveValue_${cid}`, `switchInActiveValue_${cid}`, `switchDisabled_${cid}`]
+  }
 }
