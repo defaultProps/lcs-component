@@ -1,7 +1,12 @@
 export interface LcsInputSingle extends LCS.Component {
   tag: string
-  size: LCS.Size
-  disabled: string
+  size?: LCS.Size
+  disabled?: string
+  clearable?: boolean
+  suffixIcon?: string
+  prefixIcon?: string
+  prependSlot?: LCS.Component
+  suffixSlot?: LCS.Component
 }
 
 const tag = 'lcs-element-single-input' as const

@@ -1,8 +1,8 @@
 declare namespace LCS {
 
   export interface LcsCompoentTarget {
-    [k: string]: {
-      tag: string
+    [K: string]: {
+      tag:  string
       elementNode: (cid: string) => LCS.Component
       getNodeMethods: (cid: string) => LCS.MethodInfo[]
       getSyncVariables:  (cid: string) => string[]
@@ -12,7 +12,7 @@ declare namespace LCS {
   export interface MethodInfo {
     name: string
     desc: string
-    open: boolean // 绑定组件的节点值，""代表未绑定或者取消绑定，后期可用于压缩删除代码
+    open: boolean
   }
 
   interface InternetComp {
